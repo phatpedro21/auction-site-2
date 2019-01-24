@@ -1,0 +1,20 @@
+{
+  "name": "auction-site-2",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Peter <Peter.Maloney@fdmgroup.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/phatpedro21/auction-site-2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^16.1.0"
+  }
+}
