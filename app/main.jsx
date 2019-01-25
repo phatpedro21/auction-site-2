@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Navbar from "./components/Navbar.jsx";
 import ListingList from "./components/ListingList.jsx";
+import fetch from "fetch";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Home from './components/Home.jsx';
+import ListingPage from './components/ListingPage.jsx';
 
 //Dummy Data
 
@@ -9,35 +13,54 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      topCategories: ["Top Deals", "Electricals", "Sport"],
-      items: [
-        {
-          id: 1,
-          itemName: "Hi Fi",
-          currentPrice: 100.99,
-          auctionTimeRemaining: Date("11:19")
-        },
-        {
-          id: 2,
-          itemName: "Football boots",
-          currentPrice: 65.0,
-          auctionTimeRemaining: Date("5:19")
-        },
-        {
-          id: 3,
-          itemName: "Lawnmower",
-          currentPrice: 10.1,
-          auctionTimeRemaining: Date("4:11:19")
+      topCategories: ["Instruments", "Electrical", "Clothing"],
+      items: [],
+    }
+    fetch.fetchUrl(
+      "http://localhost:3030/items",
+      (error, meta, body) => {
+        if (error) {
+          console.log("Fetching error", error);
+        } else {
+          this.setState(prevState => {
+            const newState = prevState;
+            newState.items = JSON.parse(body);
+            return newState;
+          });
         }
-      ]
-    };
+
+      }
+    );
   }
+
+  filterByCategory = category => {
+    console.log("Fetching by cat")
+    fetch.fetchUrl(
+      "http://localhost:3030/items/" + category,
+      (error, meta, body) => {
+        if (error) {
+          console.log("Fetching error", error);
+        } else {
+          this.setState(prevState => {
+            const newState = prevState;
+            newState.items = JSON.parse(body);
+            return newState;
+          });
+        }
+      }
+    );
+  };
+
   render() {
     return (
-      <div>
-        <Navbar topCategories={this.state.topCategories} />
-        <ListingList items={this.state.items} />
-      </div>
+      <Router>
+        <div>
+          <Navbar
+          />
+          <Route exact path="/" render={() => (<Home filterByCategory={this.filterByCategory} {...this.state} />)} />
+          <Route path="/listing/:id" render={() => (<ListingPage />)} />
+        </div>
+      </Router>
     );
   }
 }

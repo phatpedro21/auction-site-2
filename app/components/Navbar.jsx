@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Navbar = ({ topCategories }) => {
+const Navbar = ({ topCategories, filterByCategory }) => {
   return (
     <div>
       <h1>Auction Site</h1>
       <div href="#">My navbar</div>
-      <ul>
-        {topCategories.map((cat, index) => (
-          <li key={index}>
-            <a href="#">{cat}</a>
-          </li>
-        ))}
-      </ul>
+      <button>Login</button>
     </div>
   );
 };

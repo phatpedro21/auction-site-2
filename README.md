@@ -4,3 +4,4 @@ Globally installed packages
 
 - react-tools
 - browserify
+- gulp

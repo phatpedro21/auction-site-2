@@ -9,10 +9,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "startsrv": "babel-node server/server.js",
+    "startapi": "babel-node API/apiServer.js",
     "prestart": "run-s bundle",
-    "start": "run-p startsrv",
+    "start": "run-p startsrv startapi",
     "watch": "npm-watch",
-    "bundle": "browserify -t [ babelify --presets [ @babel/preset-env @babel/preset-react ] ] app/main.jsx -o build/main.js"
+    "bundle": "browserify -t [ babelify --presets [ @babel/preset-env @babel/preset-react] --plugins [ @babel/plugin-proposal-class-properties ] ] app/main.jsx -o build/main.js"
   },
   "repository": {
     "type": "git",
@@ -25,19 +26,30 @@
   },
   "homepage": "https://github.com/phatpedro21/auction-site-2#readme",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
     "@babel/preset-react": "^7.0.0",
     "babelify": "^10.0.0",
+    "browser-sync": "^2.26.3",
     "browserify": "^16.2.3",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "fetch": "^1.1.0",
+    "gulp": "~4.0.0",
+    "gulp-live-server": "0.0.31",
     "html": "^1.0.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
     "mocha": "^5.2.0",
+    "nedb": "^1.8.0",
     "npm-run-all": "^4.1.5",
     "npm-watch": "^0.6.0",
+    "numeral": "^2.0.6",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
     "reactify": "^1.1.1",
+    "vinyl-source-stream": "^2.0.0",
     "watch": "^1.0.2"
   },
   "devDependencies": {
